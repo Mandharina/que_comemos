@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+    <link rel="shortcut icon" href="{% static 'core/img/Heladeracirculo.ico' %}" type="image/x-icon">
+    <title>{% block title %}{% endblock %}</title>
+    
+</head>
+<body class="contenedor">
+    <header class="header">
+        <img src="{% static 'core/img/Logo_titulo.png' %}" alt="Logo">
+        <form class="form">
+            <input type="text" placeholder="Elegí un ingrediente">
+        </form>
+        <div>Iniciar sesion</div>
+    </header>
+    <nav class="nav">
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            
+        </ul>
+
+    </nav>
+    <subtitle class="subtitle">
+        {%block subtitle %}{% endblock %}
+    </subtitle>
+    <main class="main">
+        {%block content %}{% endblock %}
+    </main>
+    <footer class="footer">
+        © 2023 ¿Qué comemos? · Privacidad · Términos · Mapa del sitio
+
+    </footer>
+    
+</body>
+</html>
