@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
     <link rel="shortcut icon" href="{% static 'core/img/Heladeracirculo.ico' %}" type="image/x-icon">
+    {% block extra_css%}{%endblock%}   
     <title>{% block title %}{% endblock %}</title>
     
 </head>
@@ -15,11 +16,13 @@
         <form class="form">
             <input type="text" placeholder="Elegí un ingrediente">
         </form>
-        <div>Iniciar sesion</div>
+        <div><a href="core/usuario.html">Iniciar sesión</a></div>
     </header>
     <nav class="nav">
         <ul>
             <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'recetario' %}">Recetario</a></li>
+            
             
         </ul>
 

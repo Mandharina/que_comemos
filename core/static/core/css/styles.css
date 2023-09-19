@@ -33,9 +33,17 @@ img{
 ul{
     display: flex;
     list-style-type: none;
-    justify-content: space-between;
+    text-align: center;
     margin: 5px;
 }
+
+li{
+    padding: 10px;
+    color: azure;
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .subtitle{
     grid-area: subtitle;
     padding: 5px;
