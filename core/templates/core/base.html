@@ -13,10 +13,14 @@
 <body class="contenedor">
     <header class="header">
         <img src="{% static 'core/img/Logo_titulo.png' %}" alt="Logo">
-        <form class="form">
-            <input type="text" placeholder="Elegí un ingrediente">
+        <form class="form" method='POST' action="{% url 'buscar' %}"> {% csrf_token %}
+            <input type="text" name='ingrediente' placeholder="Elegí un ingrediente">
+            <input type="submit" value='Buscar'>
         </form>
-        <div><a href="core/usuario.html">Iniciar sesión</a></div>
+        <div>
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+            <a href="{% url 'signup' %}">Registrarse</a>
+        </div>
     </header>
     <nav class="nav">
         <ul>
