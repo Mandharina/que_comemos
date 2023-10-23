@@ -1,0 +1,16 @@
+{% extends 'core/base.html'%}
+{% load static %}
+{% block title %}Inicio de sesión{% endblock %}
+
+{%block content %}
+
+<h1>Agregar receta</h1>
+<form action="{% url 'agregar_receta' %}" method='POST'>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input type="submit" value='Siguiente'>
+</form>
+
+{% endblock %}

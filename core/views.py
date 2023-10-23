@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
+from .models import Receta, IngredienteMedido
 from . import forms
 
 def index (request):
@@ -44,3 +46,15 @@ def signup(request):
         else:
             return render(request, 'core/signup.html', {'form': form})
     return render(request, 'core/signup.html', {'form': form})
+
+class AgregarRecetaNombreCreateView(CreateView):
+    model = Receta
+    template_name = 'core/agregarreceta.html'
+    success_url = 'agregar_ingrediente'
+    fields = ['nombre','dificultad']
+
+class AgregarIngredienteCreateView(CreateView):
+    model = IngredienteMedido
+    template_name = 'core/agregar_ingrediente.html'
+    success_url = 'agregar_ingrediente'
+    fields ='__all__'
