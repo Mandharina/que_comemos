@@ -4,10 +4,13 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from .models import Receta, IngredienteMedido
 from . import forms
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index (request):
     return render(request, 'core/index.html')
 
+@login_required
 def recetario (request):
     return render(request, "core/recetario.html")
 
@@ -15,6 +18,8 @@ def recetario (request):
 def login (request, usuario):
     return HttpResponse(f"Hola {usuario} ¿No sabés qué comer hoy?")
 '''
+
+@login_required
 def buscar(request):
     if request.method == "POST":
         ingrediente = request.POST.get("ingrediente")
@@ -27,15 +32,15 @@ def login(request):
     if request.method == 'POST':
         print(request.POST)
         if form.is_valid():
-        
+
             contexto = {'form': form}
             return render(request, 'core/index.html', contexto)
         else:
             print('No Valido')
             return render(request, 'core/login.html', {'form': form})
-    
+
     return render(request, 'core/login.html', {'form': form})
-    
+
 
 def signup(request):
     form = forms.SignupForm()
@@ -47,13 +52,13 @@ def signup(request):
             return render(request, 'core/signup.html', {'form': form})
     return render(request, 'core/signup.html', {'form': form})
 
-class AgregarRecetaNombreCreateView(CreateView):
+class AgregarRecetaNombreCreateView(LoginRequiredMixin, CreateView):
     model = Receta
     template_name = 'core/agregarreceta.html'
     success_url = 'agregar_ingrediente'
     fields = ['nombre','dificultad']
 
-class AgregarIngredienteCreateView(CreateView):
+class AgregarIngredienteCreateView(LoginRequiredMixin, CreateView):
     model = IngredienteMedido
     template_name = 'core/agregar_ingrediente.html'
     success_url = 'agregar_ingrediente'
