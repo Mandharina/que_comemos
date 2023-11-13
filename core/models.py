@@ -51,7 +51,7 @@ class Receta (models.Model):
 
 
     def recetacompleta(self):
-        return f"{self.nombre} {self.dificultad} {self.detalleingrediente()} {self.descripcion}"
+        return f"{self.nombre} {self.dificultad} {self.descripcion}"
 
     def __str__(self):
         return self.recetacompleta()
