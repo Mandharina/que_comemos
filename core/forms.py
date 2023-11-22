@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm    
 from django.core.exceptions import ValidationError
-from .models import Receta, IngredienteMedido
+from .models import Receta
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Nombre de Usuario', required=True)
@@ -26,13 +26,8 @@ class SignupForm(forms.Form):
     contrasena2 = forms.CharField(label='Repita Contrasena', required=True)
 
 
-class AltaRecetaForm(ModelForm):
+class RecetaForm(ModelForm):
     class Meta:
         model = Receta
-        fields = '__all__'
-
-class AgregarIngredienteForm(ModelForm):
-    class Meta:
-        model = IngredienteMedido
         fields = '__all__'
 

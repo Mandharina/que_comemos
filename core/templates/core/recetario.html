@@ -4,31 +4,21 @@
 {% block title %}Recetario{% endblock %}
 {%block subtitle %}<h3>Mi recetario</h3>{% endblock %}
 {%block content %}
+<div>
 
-<div class="receta"><h4>Receta</h4>
-    <img src="{% static 'core/img/comida.jpg' %}" alt="Logo"><br>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nihil laudantium eos quam esse, voluptates rem vel accusantium dignissimos vero.
+<ul>
+    {% for receta in recetario %}
+        <li>
+            <p>{{ receta }}</p>
+            <a href="{% url 'editar_receta' %}">Modificar</a>
+            {% comment %} <p>{{ recetas.ingredientes }}</p>
+            <p>{{ recetas.dificultad }}</p>
+            <p>{{ recetas.descripcion }}</p> {% endcomment %}
+            
+        </li>
+    
+    {% endfor %}
+</ul>
 </div>
-<div class="receta"><h4>Receta</h4>
-    <img src="{% static 'core/img/comida.jpg' %}" alt="Logo"><br>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nihil laudantium eos quam esse, voluptates rem vel accusantium dignissimos vero.
-</div>
-<div class="receta"><h4>Receta</h4>
-    <img src="{% static 'core/img/comida.jpg' %}" alt="Logo"><br>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nihil laudantium eos quam esse, voluptates rem vel accusantium dignissimos vero.
-</div>
-<div class="receta"><h4>Receta</h4>
-    <img src="{% static 'core/img/comida.jpg' %}" alt="Logo"><br>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nihil laudantium eos quam esse, voluptates rem vel accusantium dignissimos vero.
-</div>
-<div class="receta"><h4>Receta</h4>
-    <img src="{% static 'core/img/comida.jpg' %}" alt="Logo"><br>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nihil laudantium eos quam esse, voluptates rem vel accusantium dignissimos vero.
-</div>
-<div class="receta"><h4>Receta</h4>
-    <img src="{% static 'core/img/comida.jpg' %}" alt="Logo"><br>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nihil laudantium eos quam esse, voluptates rem vel accusantium dignissimos vero.
-</div>
-
 
 {% endblock %}

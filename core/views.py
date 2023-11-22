@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.http import HttpResponse
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
-from .models import Receta, IngredienteMedido
+from .models import Receta, MiRecetario
 from . import forms
+from core.forms import RecetaForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -52,14 +54,22 @@ def signup(request):
             return render(request, 'core/signup.html', {'form': form})
     return render(request, 'core/signup.html', {'form': form})
 
-class AgregarRecetaNombreCreateView(LoginRequiredMixin, CreateView):
+class AgregarRecetaCreateView(LoginRequiredMixin, CreateView):
     model = Receta
+    form_class = RecetaForm
     template_name = 'core/agregarreceta.html'
-    success_url = 'agregar_ingrediente'
-    fields = ['nombre','dificultad']
+    success_url = 'recetario'
 
-class AgregarIngredienteCreateView(LoginRequiredMixin, CreateView):
-    model = IngredienteMedido
-    template_name = 'core/agregar_ingrediente.html'
-    success_url = 'agregar_ingrediente'
-    fields ='__all__'
+
+class EditarRecetaUpdateView(LoginRequiredMixin, UpdateView):
+    model = Receta
+    form_class = RecetaForm
+    template_name_suffix = 'core/editarreceta.html'
+    
+    
+
+class RecetarioListView(ListView):
+    model = MiRecetario
+    context_object_name = 'recetario'
+    template_name = 'core/recetario.html'
+

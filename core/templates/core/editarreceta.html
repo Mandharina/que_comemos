@@ -1,0 +1,12 @@
+{%block content %}
+
+<h1>Modificar receta</h1>
+<form action="{% url 'editar_receta' %}" method='POST'>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input type="submit" value='Modificar'>
+</form>
+
+{% endblock %}
