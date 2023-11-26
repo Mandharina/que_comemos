@@ -13,12 +13,31 @@
 <body class="contenedor">
     <header class="header">
         <img src="{% static 'core/img/Logo_titulo.png' %}" alt="Logo">
-        {% if user.is_authenticated %}
-            <form class="form" method='POST' action="{% url 'buscar' %}"> {% csrf_token %}
-                <input type="text" name='ingrediente' placeholder="Elegí un ingrediente">
-                <input type="submit" value='Buscar'>
+        {% comment %} <div>
+            <form action="">
+                <label for="name" class="">Nombre</label>
+                            
+                            <input type="text" 
+                                  id="nombre" 
+                                  name="nombre"
+                                  placeholder="Ingrese el nombre" 
+                                  >
+                                   
+                    <div class="col-3 ">
+                        <button class="btn btn-primary mt-4">Buscar</button>
+                    
+                
             </form>
-        {% endif %}
+        </div>
+         {% endcomment %}
+         {% comment %} <form method="post" action="{% url 'buscar_recetas' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Buscar</button>
+        </form> {% endcomment %}
+        
+            
+        
         <div>
             <a href="{% url 'login' %}">Iniciar sesión</a>
             <a href="{% url 'signup' %}">Registrarse</a>
@@ -27,6 +46,7 @@
     <nav class="nav">
         <ul>
             <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'buscar' %}">Buscar</a></li>
             {% if user.is_authenticated %}
                 <li><a href="{% url 'recetario' %}">Recetario</a></li>
                 <li><a href="{% url 'agregar_receta' %}">Agregar receta</a></li>

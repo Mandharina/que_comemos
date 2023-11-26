@@ -17,12 +17,13 @@ class Receta (models.Model):
 
     nombre = models.CharField(max_length=50, verbose_name="Nombre")
     dificultad = models.CharField(max_length=1, choices=DIFICULTAD)
+    #imagen = models.ImageField(upload_to='recetas_imagenes/', blank=True, null=True)
     ingredientes = models.ManyToManyField(Ingredientes)
     descripcion = models.TextField()
 
 
     def recetacompleta(self):
-        nombres_ingredientes = ', '.join(str(ingrediente) for ingrediente in self.ingredientes.all())
+        nombres_ingredientes = ', '.join(str(ingredientes) for ingredientes in self.ingredientes.all())
         return f"{self.nombre} {self.get_dificultad_display()} - Ingredientes: {nombres_ingredientes} - Descripción: {self.descripcion}"
 
     def __str__(self):
@@ -53,6 +54,5 @@ class MiRecetario(models.Model):
 #         dias = models.CharField(max_length=2, choices=DIAS)
 #         periodo = models.CharField(max_length=2, choices=PERIODO)
 
-    #Using a FileField or an ImageField (see below) in a model takes a few steps:revisar documentación
-    #foto = models.ImageField(upload_to='static/img'),
+    
     

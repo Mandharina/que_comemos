@@ -1,0 +1,16 @@
+{% extends 'core/base.html'%}
+{% load static %}
+{% block extra_css%}<link rel="stylesheet" href="{% static 'core/css/recetariost.css' %}">{%endblock%}
+{% block title %}Recetario{% endblock %}
+{%block subtitle %}<h3>Mi recetario</h3>{% endblock %}
+{%block content %}
+<div>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+
+{% endblock %}

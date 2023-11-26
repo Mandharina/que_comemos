@@ -1,7 +1,10 @@
 from django import forms
 from django.forms import ModelForm    
 from django.core.exceptions import ValidationError
-from .models import Receta
+from .models import Receta, MiRecetario
+
+class BusquedaIngredienteForm(forms.Form):
+    ingrediente = forms.CharField(max_length=100, label='Ingrediente')
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Nombre de Usuario', required=True)

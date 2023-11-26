@@ -1,0 +1,19 @@
+<h2>Resultados de la búsqueda para "{{ ingrediente }}"</h2>
+
+{% if recetas %}
+    <ul>
+        {% for receta in recetas %}
+            <li>{{ receta.nombre }}</li>
+            <ul>
+                {% for ingrediente in receta.ingredientes.all %}
+                    <li>{{ ingrediente.nombre }}</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'agregar_a_recetario' receta.id %}">
+                <button type="button">Agregar a MiRecetario</button>
+            </a>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No se encontraron recetas con ese ingrediente.</p>
+{% endif %}

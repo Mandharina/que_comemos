@@ -5,20 +5,46 @@
 {%block subtitle %}<h3>Mi recetario</h3>{% endblock %}
 {%block content %}
 <div>
-
-<ul>
-    {% for receta in recetario %}
-        <li>
-            <p>{{ receta }}</p>
-            <a href="{% url 'editar_receta' %}">Modificar</a>
-            {% comment %} <p>{{ recetas.ingredientes }}</p>
-            <p>{{ recetas.dificultad }}</p>
-            <p>{{ recetas.descripcion }}</p> {% endcomment %}
-            
-        </li>
+    {% if mi_recetario_list %}
+    <tr>
+        {% for item in mi_recetario_list %}
+            <h1><td>{{ item.recetas.nombre }}</td></h1>
+            <td>{{ item.recetas.dificultad }}</td>
+            <td>
+                {% for ingrediente in item.recetas.ingredientes.all %}
+                    <li>{{ ingrediente.nombre }}
+                {% endfor %}</td>
+        
+            <td>{{ item.recetas.descripcion }}</td>
+                    
+    </tr>
+    <td><a href="{% url 'editar_receta' item.recetas.id %}">Modificar</a></td>
+    <td><a href="{% url 'eliminar_receta' item.recetas.id %}">Eliminar</a></td> 
+        {% endfor %}
+    </ul>
     
+{% else %}
+    <p>No hay recetas en tu MiRecetario.</p>
+{% endif %}
+{% comment %} <ul>
+    {% for receta in recetas %}
+    <div>
+        <tr>
+            <td>{{ receta.nombre }}</td> 
+            <ul>
+                {% for ingrediente in receta.ingredientes.all %}
+                    <li>{{ ingrediente.nombre }}</li>
+                {% endfor %}
+            </ul>
+            <td>{{ receta.dificultad }}</td>
+            <td>{{ receta.descripcion }}</td> 
+        </tr> 
+        <td><a href="{% url 'editar_receta' receta.id %}">Modificar</a></td>
+        <td><a href="{% url 'eliminar_receta' receta.id %}">Eliminar</a></td>
+    <div>    
     {% endfor %}
 </ul>
-</div>
 
+</div>
+{% endcomment %}
 {% endblock %}
