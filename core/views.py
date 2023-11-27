@@ -2,15 +2,18 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.http import HttpResponse
-from django.views.generic import CreateView, UpdateView, DeleteView, ListView
-from .models import Receta, MiRecetario
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
+from django.forms import inlineformset_factory
+from .models import Receta, MiRecetario, Ingredientes
 from . import forms
-from core.forms import RecetaForm, BusquedaIngredienteForm
+from core.forms import RecetaForm, BusquedaIngredienteForm, IngredienteForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index (request):
     return render(request, 'core/index.html')
+
+#---------------------------------------------------------------------------------------------
 
 @login_required
 def recetario (request):
@@ -28,7 +31,9 @@ def buscar_recetas(request):
     else:
         form = BusquedaIngredienteForm()
 
-    return render(request, 'core/buscar.html', {'form': form})
+    return render(request, 'core/index2.html', {'form': form})
+
+#--------------------------------------------------------------------------------------------
 
 def agregar_a_recetario(request, receta_id):
     receta = Receta.objects.get(id=receta_id)
@@ -56,7 +61,7 @@ def login(request):
 
     return render(request, 'core/login.html', {'form': form})
 
-
+#-------------------------------------------------------------------------------------------
 def signup(request):
     form = forms.SignupForm()
     if request.method == 'POST':
@@ -75,6 +80,7 @@ class AgregarRecetaCreateView(LoginRequiredMixin, CreateView):
     form_class = RecetaForm
     template_name = 'core/agregarreceta.html'
     success_url = 'recetario'
+    
     #se sobreescribe el método
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -84,6 +90,14 @@ class AgregarRecetaCreateView(LoginRequiredMixin, CreateView):
 
         return response
 
+class VerRecetaDetailView(DetailView):
+    model = Receta
+    template_name = "core/ver_receta.html"
+    context_object_name = 'receta'
+    
+
+    
+    
 
 class EditarRecetaUpdateView(UpdateView):
     model = Receta
@@ -112,5 +126,11 @@ class RecetarioListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return MiRecetario.objects.all()
+    
+class AgregarIngredienteCreateView(CreateView):
+    model= Ingredientes
+    form_class = IngredienteForm
+    template_name = 'core/agregaringrediente.html'
+    success_url = 'agregar_receta'
 
 

@@ -1,19 +1,47 @@
-<h2>Resultados de la búsqueda para "{{ ingrediente }}"</h2>
+{% extends 'core/base.html'%}
+{% load static %}
+{% block title %}Recetario{% endblock %}
+{%block subtitle %}Resultados de la búsqueda para "{{ ingrediente }}"{% endblock %}
+{%block content %}
 
 {% if recetas %}
-    <ul>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Dificultad</th>
+            <th>¿Qué querés hacer?</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for receta in recetas %}
+            <tr>
+                <td>{{receta.nombre}}</td>
+                <td>{{receta.get_dificultad_display}}</td>
+                <td>
+                    <a href="{% url 'agregar_a_recetario' receta.id %}"title="Agregar a Mi Recetario" class="btn btn-warning">Agregar a Mi Rcetario</a>
+                    <a href="{% url 'ver_receta' receta.id %}" class="btn btn-success">Ver</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+    {% comment %} <ul>
         {% for receta in recetas %}
             <li>{{ receta.nombre }}</li>
-            <ul>
+            {% comment %} <ul>
                 {% for ingrediente in receta.ingredientes.all %}
                     <li>{{ ingrediente.nombre }}</li>
                 {% endfor %}
-            </ul>
+            </ul> 
             <a href="{% url 'agregar_a_recetario' receta.id %}">
                 <button type="button">Agregar a MiRecetario</button>
             </a>
         {% endfor %}
-    </ul>
+    </ul> {% endcomment %}
 {% else %}
     <p>No se encontraron recetas con ese ingrediente.</p>
 {% endif %}
+{% endblock %}

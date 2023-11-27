@@ -1,20 +1,22 @@
 from django.contrib import admin
 from core.models import Ingredientes, Receta, MiRecetario
-# Register your models here.
-admin.site.register(Ingredientes)
-admin.site.register(Receta)
-admin.site.register(MiRecetario)
 
-class IngredientesInline(admin.TabularInline):
-    model = Receta.ingredientes.through
 
 class IngredientesAdmin(admin.ModelAdmin):
-    inlines=[
-        IngredientesInline
-    ]
+    list_display = ['nombre']
+    #list_editable = ['nombre']
 
+@admin.register(Receta)
 class RecetaAdmin(admin.ModelAdmin):
-    inlines = [
-        IngredientesInline
-    ]
-    exclude=('ingredientes')
+    list_display = ('nombre', 'dificultad', 'descripcion')
+    
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field == 'ingredientes':
+            kwargs["queryset"] = Ingredientes.objects.filter().order_by("nombre")
+
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
+    
+# Register your models here.
+admin.site.register(Ingredientes, IngredientesAdmin)
+#admin.site.register(Receta)
+admin.site.register(MiRecetario)

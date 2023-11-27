@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm    
 from django.core.exceptions import ValidationError
-from .models import Receta, MiRecetario
+from .models import Receta, Ingredientes
 
 class BusquedaIngredienteForm(forms.Form):
     ingrediente = forms.CharField(max_length=100, label='Ingrediente')
@@ -34,3 +34,7 @@ class RecetaForm(ModelForm):
         model = Receta
         fields = '__all__'
 
+class IngredienteForm(ModelForm):
+    class Meta:
+        model = Ingredientes
+        fields = '__all__'

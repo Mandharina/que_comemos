@@ -1,65 +1,58 @@
-{% load static %}
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'core/css/mystyles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/css/estilo.css' %}">
     <link rel="shortcut icon" href="{% static 'core/img/Heladeracirculo.ico' %}" type="image/x-icon">
     {% block extra_css%}{%endblock%}   
     <title>{% block title %}{% endblock %}</title>
     
 </head>
-<body class="contenedor">
-    <header class="header">
-        <img src="{% static 'core/img/Logo_titulo.png' %}" alt="Logo">
-        {% comment %} <div>
-            <form action="">
-                <label for="name" class="">Nombre</label>
-                            
-                            <input type="text" 
-                                  id="nombre" 
-                                  name="nombre"
-                                  placeholder="Ingrese el nombre" 
-                                  >
-                                   
-                    <div class="col-3 ">
-                        <button class="btn btn-primary mt-4">Buscar</button>
-                    
-                
-            </form>
-        </div>
-         {% endcomment %}
-         {% comment %} <form method="post" action="{% url 'buscar_recetas' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Buscar</button>
-        </form> {% endcomment %}
-        
-            
-        
-        <div>
-            <a href="{% url 'login' %}">Iniciar sesión</a>
-            <a href="{% url 'signup' %}">Registrarse</a>
+<body>
+    <header>
+        <div class="row">
+            <div class="col">                
+                <img src="{% static 'core/img/Logo_titulo.png' %}" class="img-fluid rounded mx-auto d-block" alt="Logo" width="45%">
+            </div>
         </div>
     </header>
-    <nav class="nav">
-        <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'buscar' %}">Buscar</a></li>
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'recetario' %}">Recetario</a></li>
-                <li><a href="{% url 'agregar_receta' %}">Agregar receta</a></li>
-            {% endif %}
-        </ul>
-
-    </nav>
-    <subtitle class="subtitle">
-        {%block subtitle %}{% endblock %}
-    </subtitle>
+        <nav class="navbar bg-success-subtle">
+            <div class="container-fluid">
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">                    
+                    {% if not user.is_authenticated %}
+                    <li><a href="{% url 'login' %}" class="nav-link px-2 link-dark fw-bold">Iniciar sesión</a></li>
+                    {%else%}
+                    {% comment %} <li> Hola {{user.username}}</li> {% endcomment %}
+                    <li><a href="{% url 'logout' %}" class="nav-link px-2 link-dark fw-bold">Cerrar sesión</a></li>
+                    {%endif%}
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'recetario'%}" class="nav-link px-2 link-dark fw-bold">Recetario</a></li>
+                    <li><a href="{% url 'agregar_receta' %}" class="nav-link px-4 link-dark fw-bold" >Agregar receta</a></li>
+                    {%endif%}
+                 </ul>
+                 <span class="navbar-text">
+                        <a href="{% url 'index' %}" class="navbar-brand">
+                        <img src="{% static 'core/img/hogar.png' %}" alt="logo home" width="40" class="d-inline-block align-text-center">
+                        Inicio
+                    </a>
+                </span>
+            </div>
+        </nav>
+        
+    <div class="d-flex justify-content-center bg-success mt-1">
+        <subtitle class=" fs-2 fw-bold ">
+            {%block subtitle %}{% endblock %}
+        </subtitle>
+    </div>
     <main class="main">
         {%block content %}{% endblock %}
     </main>
+    
+    
     <footer class="footer">
         © 2023 ¿Qué comemos? · Privacidad · Términos · Mapa del sitio
 

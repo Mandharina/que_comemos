@@ -1,50 +1,42 @@
 {% extends 'core/base.html'%}
 {% load static %}
-{% block extra_css%}<link rel="stylesheet" href="{% static 'core/css/recetariost.css' %}">{%endblock%}
 {% block title %}Recetario{% endblock %}
-{%block subtitle %}<h3>Mi recetario</h3>{% endblock %}
+{%block subtitle %}Mi recetario{% endblock %}
 {%block content %}
-<div>
-    {% if mi_recetario_list %}
-    <tr>
-        {% for item in mi_recetario_list %}
-            <h1><td>{{ item.recetas.nombre }}</td></h1>
-            <td>{{ item.recetas.dificultad }}</td>
-            <td>
-                {% for ingrediente in item.recetas.ingredientes.all %}
-                    <li>{{ ingrediente.nombre }}
-                {% endfor %}</td>
+<div class="container-fluid">
+{% if mi_recetario_list %}
+<div class="row row-cols-3 row-cols-md-3 g-4 p-5">   
+    {% for item in mi_recetario_list %}
         
-            <td>{{ item.recetas.descripcion }}</td>
-                    
-    </tr>
-    <td><a href="{% url 'editar_receta' item.recetas.id %}">Modificar</a></td>
-    <td><a href="{% url 'eliminar_receta' item.recetas.id %}">Eliminar</a></td> 
-        {% endfor %}
-    </ul>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'core/img/fotoscomida/comida' %}{{ forloop.counter }}.jpg" class="card-img-top" alt="imagen plato">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ item.recetas.nombre }}</h5>
+                    <p class="card-text"><small class="text-body-secondary">{{ item.recetas.get_dificultad_display}}</small></p>
+                    <p class="card-text">
+                        
+                        {% for ingrediente in item.recetas.ingredientes.all %}
+                            <li>{{ ingrediente.nombre }}
+                        {% endfor %}</p>
+        
+                        <p class="card-text">{{ item.recetas.descripcion }}</p>
+                    </div>
+                    <div class="d-flex justify-content-evenly p-3">
+                    <a href="{% url 'ver_receta' item.recetas.id %}" class="btn btn-success">Ver</a>
+                    <a href="{% url 'editar_receta' item.recetas.id %}" class="btn btn-success">Modificar</a>
+                    <a href="{% url 'eliminar_receta' item.recetas.id %}"class="btn btn-danger">Eliminar</a> 
+                    </div>
+                </div>
+            </div>
+        
     
+    {% endfor %}
+    
+</div>    
 {% else %}
     <p>No hay recetas en tu MiRecetario.</p>
 {% endif %}
-{% comment %} <ul>
-    {% for receta in recetas %}
-    <div>
-        <tr>
-            <td>{{ receta.nombre }}</td> 
-            <ul>
-                {% for ingrediente in receta.ingredientes.all %}
-                    <li>{{ ingrediente.nombre }}</li>
-                {% endfor %}
-            </ul>
-            <td>{{ receta.dificultad }}</td>
-            <td>{{ receta.descripcion }}</td> 
-        </tr> 
-        <td><a href="{% url 'editar_receta' receta.id %}">Modificar</a></td>
-        <td><a href="{% url 'eliminar_receta' receta.id %}">Eliminar</a></td>
-    <div>    
-    {% endfor %}
-</ul>
 
 </div>
-{% endcomment %}
 {% endblock %}

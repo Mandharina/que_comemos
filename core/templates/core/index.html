@@ -1,12 +1,20 @@
 {% extends 'core/base.html'%}
 {% load static %}
 {% block title %}¿Qué comemos?{% endblock %}
-{%block subtitle %}<h3>Sugerencias para hoy</h3>{% endblock %}
+
 
 {%block content %}
+<div class="row align-items-center bg-success p-3">
+    <form method="post" action="{% url 'buscar' %}" class="d-flex" >
+      {% csrf_token %}
+      
+      <input class="form-control me-1" type="search" name= "ingrediente" placeholder="¿Qué hay en tu heladera?" aria-label="Search">
+      <button class="btn btn-outline-dark" type="submit">Buscar</button>
+    </form>
 
+<div>
 
-<div><p>1. Ensalada de Pollo a la Parrilla:
+{% comment %} <p>1. Ensalada de Pollo a la Parrilla:
 </p>
 <p>    Ingredientes:
 </p>
@@ -32,6 +40,6 @@
 </p><p>   -Salsa de tomate (puedes usar una salsa lista o hacer la tuya con tomates triturados, ajo, cebolla, albahaca y orégano)
 </p><p>   -Queso parmesano rallado (opcional)
 </p>
-   </div>
+   </div> {% endcomment %}
 
 {% endblock %}
