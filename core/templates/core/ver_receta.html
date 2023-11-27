@@ -9,7 +9,7 @@
                 {% endfor %}
 {%block content %}
 <div class="d-flex justify-content-center ">
-    <div class="card mb-3" style="max-width: 540px;">
+    <div class="card mb-3" style="max-width: 100%;">
         <div class="row g-0">
             <div class="col-md-4">
                 <img src="{% static '' %}recetas_imagenes/{{receta.imagen}}" class="img-fluid rounded-start" alt="imagen plato">
@@ -20,8 +20,8 @@
                     <p class="card-text"><small class="text-body-secondary">{{receta.get_dificultad_display}}</small></p>
                     <p class="card-text">
             
-                     {% for ingrediente in recetasingredientes.all %}
-                    <li>{{ ingrediente.nombre }}
+                     {% for ingrediente in receta.ingredientes.all %}
+                    <li>{{ ingrediente.nombre }}</li>
                      {% endfor %}</p>
                     <p class="card-text">{{receta.descripcion }}</p>
                 </div>        
@@ -31,7 +31,7 @@
     
 </div>
 <div class="" >
-    <a href="javascript:history.back()" class=" btn btn-primary m-3"> Volver</a>
-</div>
+        <a href="javascript:history.back()" class=" btn btn-primary m-3"> Volver</a>
+    </div>
 {% endblock %}
 
