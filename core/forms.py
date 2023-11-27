@@ -53,7 +53,8 @@ class RecetaForm(forms.ModelForm):
         label="Descripción",
         widget=forms.Textarea(attrs={'rows': 5, 'class': 'form-control', 'placeholder': 'Detallá los pasos'})
     )
-    # """Se utiliza ModelChoiceField para poder realizar un filtrado de lo que
+
+        # """Se utiliza ModelChoiceField para poder realizar un filtrado de lo que
     # quiero mostrar en el selector"""
     # categoria = forms.ModelChoiceField(
     #     queryset=Categoria.objects.filter(baja=False),
@@ -62,7 +63,7 @@ class RecetaForm(forms.ModelForm):
 
     class Meta:
         model = Receta
-        fields = '__all__'
+        fields = ("nombre", "dificultad", "ingredientes", "descripcion" ,"imagen",)
 
 class IngredienteForm(ModelForm):
     class Meta:

@@ -17,7 +17,7 @@ class Receta (models.Model):
 
     nombre = models.CharField(max_length=50, verbose_name="Nombre")
     dificultad = models.CharField(max_length=1, choices=DIFICULTAD)
-    #imagen = models.ImageField(upload_to='recetas_imagenes/', blank=True, null=True)
+    imagen = models.ImageField(blank=True, null=True)
     ingredientes = models.ManyToManyField(Ingredientes)
     descripcion = models.TextField()
 

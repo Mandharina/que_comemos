@@ -4,7 +4,7 @@
 {%block subtitle %}Agregar receta{% endblock %}
 {%block content %}
 <div class="container p-3">
-<form class="form-control mb-3" action="{% url 'agregar_receta' %}" method='POST'>
+<form class="form-control mb-3" enctype="multipart/form-data" action="{% url 'agregar_receta' %}" method='POST'>
     {% csrf_token %}
 
     {{ form.as_p }}

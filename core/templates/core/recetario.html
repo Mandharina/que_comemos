@@ -10,7 +10,8 @@
         
             <div class="col">
                 <div class="card">
-                    <img src="{% static 'core/img/fotoscomida/comida' %}{{ forloop.counter }}.jpg" class="card-img-top" alt="imagen plato">
+                    <img src="{% static '' %}recetas_imagenes/{{ item.recetas.imagen}}" class="card-img-top" alt="imagen plato">
+
                     <div class="card-body">
                     <h5 class="card-title">{{ item.recetas.nombre }}</h5>
                     <p class="card-text"><small class="text-body-secondary">{{ item.recetas.get_dificultad_display}}</small></p>

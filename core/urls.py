@@ -1,6 +1,8 @@
 from django.urls import path 
 from . import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(template_name='core/login.html'),name='login'),
@@ -18,3 +20,5 @@ urlpatterns = [
     path('agregar_a_recetario/<int:receta_id>/', views.agregar_a_recetario, name='agregar_a_recetario'),
     path('agregar_ingrediente', views.AgregarIngredienteCreateView.as_view(), name="agregar_ingrediente"),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
