@@ -1,0 +1,9 @@
+<td>
+    {% if user.is_authenticated %}
+            <a href="{% url 'agregar_a_recetario' receta.id %}" title="Agregar a Mi Recetario" class="btn btn-warning m-1">Agregar a Mi Rcetario</a>
+        {% else %}
+            <a href="{% url 'login' %}" title= "Inicia sesión"class="btn btn-warning m-1"> Inicia sesión para agregar a Mi Recetario</a>
+            
+        {% endif %}
+    <a href="{% url 'ver_receta' receta.id %}" class="btn btn-success m-1">Ver</a>
+</td>

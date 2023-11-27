@@ -4,12 +4,12 @@
 
 
 {%block content %}
-<div class="row align-items-center bg-success p-3">
+<div class="container bg-success p-3">
     <form method="post" action="{% url 'buscar' %}" class="d-flex" >
       {% csrf_token %}
       
       <input class="form-control me-1" type="search" name= "ingrediente" placeholder="¿Qué hay en tu heladera?" aria-label="Search">
-      <button class="btn btn-outline-dark" type="submit">Buscar</button>
+      <button class="btn btn-outline-dark m-1" type="submit">Buscar</button>
     </form>
 
 <div>

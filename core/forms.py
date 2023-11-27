@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.forms import ModelForm    
 from django.core.exceptions import ValidationError
 from .models import Receta, Ingredientes
@@ -29,7 +30,36 @@ class SignupForm(forms.Form):
     contrasena2 = forms.CharField(label='Repita Contrasena', required=True)
 
 
-class RecetaForm(ModelForm):
+class RecetaForm(forms.ModelForm):
+    nombre = forms.CharField(
+        label='Nombre',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    
+    dificultad = forms.ChoiceField(
+        label="Dificultad",
+        choices=Receta.DIFICULTAD,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    
+    ingredientes = forms.ModelMultipleChoiceField(
+        label='Ingredientes',
+        queryset=Ingredientes.objects.all(),
+        widget=FilteredSelectMultiple("Ingredientes", is_stacked=False),
+    
+    )
+    
+    descripcion = forms.CharField(
+        label="Descripción",
+        widget=forms.Textarea(attrs={'rows': 5, 'class': 'form-control', 'placeholder': 'Detallá los pasos'})
+    )
+    # """Se utiliza ModelChoiceField para poder realizar un filtrado de lo que
+    # quiero mostrar en el selector"""
+    # categoria = forms.ModelChoiceField(
+    #     queryset=Categoria.objects.filter(baja=False),
+    #     widget=forms.Select(attrs={'class': 'form-control'})
+    # )
+
     class Meta:
         model = Receta
         fields = '__all__'

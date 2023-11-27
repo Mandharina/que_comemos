@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.http import HttpResponse
@@ -36,15 +36,18 @@ def buscar_recetas(request):
 #--------------------------------------------------------------------------------------------
 
 def agregar_a_recetario(request, receta_id):
-    receta = Receta.objects.get(id=receta_id)
+    receta = get_object_or_404(Receta, id=receta_id)
 
-    mi_recetario = MiRecetario(recetas=receta)
-    mi_recetario.save()
+    # Verificar si la receta ya está en MiRecetario
+    if MiRecetario.objects.filter(recetas=receta).exists():
+        messages.warning(request, "La receta ya está en tu recetario.")
+    else:
+        # Si no existe, agregar la receta a MiRecetario
+        mi_recetario = MiRecetario(recetas=receta)
+        mi_recetario.save()
+        messages.info(request, "Receta agregada a tu recetario.")
 
-    messages.info(request, "Receta agregada")
-    return redirect('recetario')  # Puedes redirigir a otra página o hacer lo que sea necesario
-    
-
+    return redirect('recetario')
 
 #-------------------------------------------------------------------------------------------
 def login(request):
@@ -95,7 +98,6 @@ class VerRecetaDetailView(DetailView):
     template_name = "core/ver_receta.html"
     context_object_name = 'receta'
     
-
     
     
 

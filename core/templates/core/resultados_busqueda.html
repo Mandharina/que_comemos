@@ -2,46 +2,34 @@
 {% load static %}
 {% block title %}Recetario{% endblock %}
 {%block subtitle %}Resultados de la búsqueda para "{{ ingrediente }}"{% endblock %}
+
 {%block content %}
 
 {% if recetas %}
-<table class="table">
-    <thead>
+<table class="table p-3">
+    <thead >
         <tr>
             <th>Nombre</th>
             <th>Dificultad</th>
             <th>¿Qué querés hacer?</th>
         </tr>
-    </thead>
-    <tbody>
+    </thead >
+    <tbody >
         {% for receta in recetas %}
             <tr>
-                <td>{{receta.nombre}}</td>
-                <td>{{receta.get_dificultad_display}}</td>
-                <td>
-                    <a href="{% url 'agregar_a_recetario' receta.id %}"title="Agregar a Mi Recetario" class="btn btn-warning">Agregar a Mi Rcetario</a>
-                    <a href="{% url 'ver_receta' receta.id %}" class="btn btn-success">Ver</a>
-                </td>
+                <td class="m-3">{{receta.nombre}}</td>
+                <td class="m-3">{{receta.get_dificultad_display}}</td>
+                {%include 'core/botones.html'%}
             </tr>
         {% endfor %}
 
     </tbody>
 </table>
 
-    {% comment %} <ul>
-        {% for receta in recetas %}
-            <li>{{ receta.nombre }}</li>
-            {% comment %} <ul>
-                {% for ingrediente in receta.ingredientes.all %}
-                    <li>{{ ingrediente.nombre }}</li>
-                {% endfor %}
-            </ul> 
-            <a href="{% url 'agregar_a_recetario' receta.id %}">
-                <button type="button">Agregar a MiRecetario</button>
-            </a>
-        {% endfor %}
-    </ul> {% endcomment %}
 {% else %}
     <p>No se encontraron recetas con ese ingrediente.</p>
 {% endif %}
+<div class="" >
+    <a href="javascript:history.back()" class=" btn btn-primary m-3"> Volver</a>
+</div>
 {% endblock %}

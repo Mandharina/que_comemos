@@ -13,6 +13,13 @@
     
 </head>
 <body>
+    {% if messages %} 
+        <ul class="messages"> 
+            {% for message in messages %} 
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> 
+            {% endfor %} 
+        </ul> 
+    {% endif %} 
     <header>
         <div class="row">
             <div class="col">                
@@ -43,17 +50,17 @@
             </div>
         </nav>
         
-    <div class="d-flex justify-content-center bg-success mt-1">
+    <div class="d-flex justify-content-center bg-success m-1">
         <subtitle class=" fs-2 fw-bold ">
             {%block subtitle %}{% endblock %}
         </subtitle>
     </div>
-    <main class="main">
+    <main class="container-fluid bg-dark p-4">
         {%block content %}{% endblock %}
     </main>
     
     
-    <footer class="footer">
+    <footer class="">
         © 2023 ¿Qué comemos? · Privacidad · Términos · Mapa del sitio
 
     </footer>

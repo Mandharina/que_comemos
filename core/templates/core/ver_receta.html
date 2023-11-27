@@ -2,8 +2,14 @@
 {% load static %}
 {% block title %}{{ receta.nombre }}{% endblock %}
 {%block subtitle %}{{ receta.nombre }}{% endblock %}
+{% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{message}}
+                    </div>
+                {% endfor %}
 {%block content %}
-<div class="col">
+<div class="container">
+<div class="col p-2">
     <div class="card">
         <img src="{% static 'core/img/fotoscomida/comida' %}{{ forloop.counter }}.jpg" class="card-img-top" alt="imagen plato">
         <div class="card-body">
@@ -17,7 +23,16 @@
 
             <p class="card-text">{{receta.descripcion }}</p>
         </div>
+        <div class="d-flex justify-content-end">
+        {%include 'core/botones.html'%}
+        </div>
+        
+    </div>
+    </div>
+    <div class="" >
+        <a href="javascript:history.back()" class=" btn btn-primary m-3"> Volver</a>
     </div>
 </div>
+
 {% endblock %}
 

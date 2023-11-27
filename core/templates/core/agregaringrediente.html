@@ -1,11 +1,11 @@
 {% extends 'core/base.html'%}
 {% load static %}
-{% block title %}Inicio de sesión{% endblock %}
-
+{% block title %}Agregar Ingrediente {% endblock %}
+{%block subtitle %}Agregar ingrediente{% endblock %}
 {%block content %}
 
-<h1>Agregar receta</h1>
-<form action="{% url 'agregar_ingrediente' %}" method='POST'>
+
+<form class="form-control m-3" action="{% url 'agregar_ingrediente' %}" method='POST'>
     {% csrf_token %}
 
     {{ form.as_p }}

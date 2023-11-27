@@ -1,21 +1,29 @@
 {% extends 'core/base.html'%}
 {% load static %}
 {% block title %}Agregar receta{% endblock %}
-
+{%block subtitle %}Agregar receta{% endblock %}
 {%block content %}
-
-<h1>Agregar receta</h1>
-<form action="{% url 'agregar_receta' %}" method='POST'>
+<div class="container p-3">
+<form class="form-control mb-3" action="{% url 'agregar_receta' %}" method='POST'>
     {% csrf_token %}
 
     {{ form.as_p }}
     
-    <input type="submit" value='Crear receta y guardar en MIRecetario'>
-    <div> ¿No está el ingrediente que necesitas?   
-        <a href="{% url 'agregar_ingrediente' %}">
-        <button type="button">Agregar Ingredientes</button>
-    </a>
+    
+    <div class="d-flex justify-content-evenly p-3">
+        <div>
+            <div class="fs-4"> ¿No está el ingrediente que necesitas? </div>  
+            <a href="{% url 'agregar_ingrediente' %}"class="btn btn-primary">Agregar Ingrediente</a>
+            
+        </div>
+       
+       
+        <div>
+            <input type="submit" value='Crear receta y guardar en Mi Recetario' class="btn btn-success">
+        </div>
+        
     </div>
 </form>
+</div>
 
 {% endblock %}
