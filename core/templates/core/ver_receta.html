@@ -8,31 +8,30 @@
                     </div>
                 {% endfor %}
 {%block content %}
-<div class="container">
-<div class="col p-2">
-    <div class="card">
-        <img src="{% static 'core/img/fotoscomida/comida' %}{{ forloop.counter }}.jpg" class="card-img-top" alt="imagen plato">
-        <div class="card-body">
-        <h5 class="card-title">{{receta.nombre }}</h5>
-        <p class="card-text"><small class="text-body-secondary">{{receta.get_dificultad_display}}</small></p>
-        <p class="card-text">
+<div class="d-flex justify-content-center ">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{% static '' %}recetas_imagenes/{{receta.imagen}}" class="img-fluid rounded-start" alt="imagen plato">
+            </div>    
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{receta.nombre }}</h5>
+                    <p class="card-text"><small class="text-body-secondary">{{receta.get_dificultad_display}}</small></p>
+                    <p class="card-text">
             
-            {% for ingrediente in recetasingredientes.all %}
-                <li>{{ ingrediente.nombre }}
-            {% endfor %}</p>
-
-            <p class="card-text">{{receta.descripcion }}</p>
+                     {% for ingrediente in recetasingredientes.all %}
+                    <li>{{ ingrediente.nombre }}
+                     {% endfor %}</p>
+                    <p class="card-text">{{receta.descripcion }}</p>
+                </div>        
+            </div>
         </div>
-        <div class="d-flex justify-content-end">
-        {%include 'core/botones.html'%}
-        </div>
-        
     </div>
-    </div>
-    <div class="" >
-        <a href="javascript:history.back()" class=" btn btn-primary m-3"> Volver</a>
-    </div>
+    
 </div>
-
+<div class="" >
+    <a href="javascript:history.back()" class=" btn btn-primary m-3"> Volver</a>
+</div>
 {% endblock %}
 
