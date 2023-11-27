@@ -1,12 +1,29 @@
+{% extends 'core/base.html'%}
+{% load static %}
+{% block title %}Editar receta{% endblock %}
+{%block subtitle %}Editar receta{% endblock %}
 {%block content %}
-
-<h1>Modificar receta</h1>
-<form action="" method='POST'>
+<div class="container p-3">
+<form class="form-control mb-3" enctype="multipart/form-data" action="" method='POST'>
     {% csrf_token %}
 
     {{ form.as_p }}
-
-    <input type="submit" value='Modificar'>
+    
+    
+    
+       
+       
+        <div>
+            <input type="submit" value='Modificar' class="btn btn-success">
+        </div>
+        
+    </div>
 </form>
+</div>
 
 {% endblock %}
+
+
+
+
+
