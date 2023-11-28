@@ -54,13 +54,7 @@ class RecetaForm(forms.ModelForm):
         widget=forms.Textarea(attrs={'rows': 5, 'class': 'form-control', 'placeholder': 'Detallá los pasos'})
     )
 
-        # """Se utiliza ModelChoiceField para poder realizar un filtrado de lo que
-    # quiero mostrar en el selector"""
-    # categoria = forms.ModelChoiceField(
-    #     queryset=Categoria.objects.filter(baja=False),
-    #     widget=forms.Select(attrs={'class': 'form-control'})
-    # )
-
+    
     class Meta:
         model = Receta
         fields = ("nombre", "dificultad", "ingredientes", "descripcion" ,"imagen",)

@@ -114,11 +114,6 @@ class EliminarRecetaDeleteView(DeleteView):
     template_name = 'core/eliminarreceta.html'
     success_url = reverse_lazy('recetario')
 
-#class RecetarioListView(ListView):
-#    model = Receta
-#    context_object_name = 'recetas'
-#    template_name = 'core/recetario.html'
-#    ordering = ['nombre']
 
 class RecetarioListView(LoginRequiredMixin, ListView):
     model = MiRecetario
